@@ -8,6 +8,7 @@
         android:id="@+id/iconIV"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:src="@drawable/logo_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/app_name" />
@@ -16,6 +17,7 @@
         android:id="@+id/titleTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iconIV"
         app:layout_constraintTop_toTopOf="parent"/>

@@ -22,6 +22,8 @@
         android:id="@+id/RecyclerView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_recyclerview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

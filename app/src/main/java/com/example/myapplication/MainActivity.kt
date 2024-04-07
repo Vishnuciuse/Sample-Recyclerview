@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -7,13 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.UI.CellClickListener
+import com.example.myapplication.UI.DetailsActivity
 import com.example.myapplication.UI.ProductAdapter
 import com.example.myapplication.api.QuotesApi
 import com.example.myapplication.api.RetrofitHelper
 import com.example.myapplication.dataclass.Products
 import com.example.myapplication.dataclass.product_item
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var rvMain: RecyclerView
     lateinit var myAdapter: ProductAdapter
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,22 +40,22 @@ class MainActivity : AppCompatActivity() {
         // launching a new coroutine
         GlobalScope.launch {
             val result = quotesApi.getQuotes()
-            if (result != null)
-            // Checking the results
+            if (result != null) {
+                // Checking the results
                 Log.d("ayush: ", result.body().toString())
-            val list: Products? = result.body()
-             pList = list!!.products as ArrayList<product_item>
-            Log.d("product list","$pList")
-            temp.update(pList)
+                val list: Products? = result.body()
+                pList = list!!.products as ArrayList<product_item>
+                Log.d("product list", "$pList")
+                temp.update(pList)
 
 
 
-            runOnUiThread {
-                myAdapter =  ProductAdapter(baseContext, pList, listener)
-                rvMain.adapter = myAdapter
+                runOnUiThread {
+                    myAdapter = ProductAdapter(baseContext, pList, listener)
+                    rvMain.adapter = myAdapter
+                }
+
             }
-
-
         }
         val images : List<String> = listOf("image")
 //        pList.add(product_item(1,"vishnu","",12,2.3,4.3,20,"","","",images))
